@@ -12,7 +12,7 @@ Temas:
  
  (Apague essa seção)
 
-# NomedoProjeto
+# Maze Solver
 
 **Número da Lista**: X<br>
 **Conteúdo da Disciplina**: XXXXXXXXXX<br>
@@ -20,20 +20,16 @@ Temas:
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 18/0062760  |  Bruno Bernardes Duarte |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+O projeto consiste em um simulador de labirinto. 
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-
+**Linguagem**: Javascript<br>
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 

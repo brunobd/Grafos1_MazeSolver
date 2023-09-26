@@ -1,10 +1,14 @@
 *{
-  padding: 10px;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
 
 }
+h1{
+  margin:10px 0
+}
 .canvas-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +22,7 @@
   width: 700px;
 }
 
+
 .btn{
   padding: 10px 32px;
   border-radius: 1rem;
@@ -28,6 +33,22 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: uppercase;
+
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 2.5px;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 .btn:active{
   transform: scale(0.96);

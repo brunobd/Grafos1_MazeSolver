@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solve a Maze!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  </head>
+  <body>
+    <div class="canvas-container">
+      <h1>Maze Solver</h1>
+      <canvas id="canvas" width="700" height="700"></canvas>
+      <br />
+      <div id="menu">
+        <button class="btn btn-solve" onclick="depth_first_search()">Solve</button>
+        <button class="btn btn-reset" onclick="reset()">Reset</button>
+        <button class="btn btn-abort" onclick="abortSolving()">Abort</button>
+      </div>
+      <p id="output"></p>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

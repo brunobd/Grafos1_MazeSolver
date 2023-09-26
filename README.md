@@ -9,10 +9,14 @@
 | 18/0062760  |  Bruno Bernardes Duarte |
 
 ## Sobre 
-O projeto consiste um resolvedor de labirinto, o qual o usuário desenha na tela, e
+O projeto consiste em um resolvedor de labirinto, o qual é desenhado na tela pelo usuário.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+<div>
+<img src="./.github/01.png" alt="unsolved" width="200"/>
+<img src="./.github/02.png" alt="solving" width="200"/>
+<img src="./.github/03.png" alt="solved" width="200"/>
+</div>
 
 ## Instalação 
 **Linguagem**: Javascript<br>

@@ -10,14 +10,19 @@ tileH = 25;
 tileRowCount = 25;
 tileColumnCount = 25;
 
+function generateRandomCoordinates() {
+  min = 0;
+  max = 25;
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
 boundX = 0;
 boundY = 0;
 
-startX = 15;
-startY = 15;
-
-finishX = 20;
-finishY = 20;
+let startX = generateRandomCoordinates();
+let = startY = generateRandomCoordinates();
+const finishX = 24;
+const finishY = 24;
 
 var solving = false;
 var finished = true;
@@ -39,9 +44,11 @@ tiles[startX][startY].state = "s";
 tiles[finishX][finishY].state = "f";
 let abort = false;
 function abortSolving() {
-
+  if (finished) {
+    return;
+  }
   output.innerText = "Aborted";
-  aborted=true;
+  aborted = true;
   abort = true;
 }
 
@@ -98,7 +105,6 @@ async function depth_first_search() {
     return;
   }
   if (!solving && finished) {
-
     output.innerText = "Solving...";
     solving = true;
     finished = false;
@@ -193,7 +199,7 @@ async function depth_first_search() {
         abort = false;
         return;
       }
-      await timer(0.05);
+      await timer(0.02);
       draw();
     }
     if (!path_found) {
@@ -234,6 +240,12 @@ function init() {
 
 function reset() {
   if (!solving) {
+    startX = generateRandomCoordinates();
+    startY = generateRandomCoordinates();
+    while (startX == finishX && startY == finishY) {
+      startX = generateRandomCoordinates();
+      startY = generateRandomCoordinates();
+    }
     finished = true;
     for (c = 0; c < tileColumnCount; c++) {
       tiles[c] = [];
@@ -249,7 +261,7 @@ function reset() {
     aborted = false;
   }
 }
-function myMove(e) {
+function mouseMove(e) {
   if (finished) {
     x = e.pageX - canvas.offsetLeft;
     y = e.pageY - canvas.offsetTop;
@@ -275,9 +287,9 @@ function myMove(e) {
     }
   }
 }
-function myDown(e) {
+function onMouseDown(e) {
   if (finished) {
-    canvas.onmousemove = myMove;
+    canvas.onmousemove = mouseMove;
 
     x = e.pageX - canvas.offsetLeft;
     y = e.pageY - canvas.offsetTop;
@@ -305,9 +317,9 @@ const timer = (seconds) => {
   return new Promise((res) => setTimeout(res, time));
 };
 
-function myUp() {
+function onMouseUp() {
   canvas.onmousemove = null;
 }
 init();
-canvas.onmousedown = myDown;
-canvas.onmouseup = myUp;
+canvas.onmousedown = onMouseDown;
+canvas.onmouseup = onMouseUp;

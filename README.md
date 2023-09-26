@@ -23,16 +23,16 @@ Temas:
 | 18/0062760  |  Bruno Bernardes Duarte |
 
 ## Sobre 
-O projeto consiste em um simulador de labirinto. 
+O projeto consiste em  labirinto, o qual o usuário desenha na tela, e
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
 **Linguagem**: Javascript<br>
+[Disponível Aqui !]()
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
-
+Basta desenhar o labirinto com o mouse e clicar no botão "Solve!"
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
 

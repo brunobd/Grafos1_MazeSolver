@@ -36,7 +36,7 @@ for (c = 0; c < tileColumnCount; c++) {
       x: c * (tileW + 3),
       y: r * (tileH + 3),
       state: "e",
-      on_queue: false,
+      on_stack: false,
     };
   }
 }
@@ -52,8 +52,8 @@ function abortSolving() {
   abort = true;
 }
 
-function rect(x, y, w, h, state, on_queue) {
-  if (on_queue) {
+function rect(x, y, w, h, state, on_stack) {
+  if (on_stack) {
     context.fillStyle = "#FF00FF";
   } else {
     if (state == "s") {
@@ -91,7 +91,7 @@ function draw() {
         tileW,
         tileH,
         tiles[c][r].state,
-        tiles[c][r].on_queue
+        tiles[c][r].on_stack
       );
     }
   }
@@ -115,7 +115,7 @@ async function depth_first_search() {
       let tile = stack.shift();
       var x_loc = tile[0];
       var y_loc = tile[1];
-      tiles[x_loc][y_loc].on_queue = false;
+      tiles[x_loc][y_loc].on_stack = false;
       if (x_loc > 0) {
         if (tiles[x_loc - 1][y_loc].state == "f") {
           path_found = true;
@@ -188,8 +188,8 @@ async function depth_first_search() {
         while (adjacency_list.length > 0) {
           let adj = adjacency_list.shift();
           if (visited[adj[1] * tileRowCount + adj[0]] == false) {
-            stack.push(adj);
-            tiles[adj[0]][adj[1]].on_queue = true;
+            stack.unshift(adj);
+            tiles[adj[0]][adj[1]].on_stack = true;
           }
         }
       }
@@ -225,6 +225,8 @@ async function depth_first_search() {
           currX -= 1;
         }
         tiles[currX][currY].state = "x";
+        await timer(0.02);
+        draw();
       }
     }
   }
@@ -321,5 +323,151 @@ function onMouseUp() {
   canvas.onmousemove = null;
 }
 init();
+
+async function solve() {
+  const select = document.querySelector("#select");
+  const option = select.value;
+  if (option == "bfs") {
+    await breadth_first_search();
+  } else if (option == "dfs") {
+    await depth_first_search();
+  }
+}
 canvas.onmousedown = onMouseDown;
 canvas.onmouseup = onMouseUp;
+
+async function breadth_first_search() {
+  if (aborted) {
+    solving = false;
+    finished = true;
+    abort = false;
+    return;
+  }
+  if (!solving && finished) {
+    output.innerText = "Solving...";
+    solving = true;
+    finished = false;
+    let visited = Array(tileColumnCount * tileRowCount).fill(false);
+    let stack = [[startX, startY, tiles[startX][startY].state]];
+    var path_found = false;
+    while (stack.length > 0 && !path_found) {
+      let tile = stack.shift();
+      var x_loc = tile[0];
+      var y_loc = tile[1];
+      tiles[x_loc][y_loc].on_stack = false;
+      if (x_loc > 0) {
+        if (tiles[x_loc - 1][y_loc].state == "f") {
+          path_found = true;
+        }
+      }
+      if (x_loc < tileColumnCount - 1) {
+        if (tiles[x_loc + 1][y_loc].state == "f") {
+          path_found = true;
+        }
+      }
+      if (y_loc > 0) {
+        if (tiles[x_loc][y_loc - 1].state == "f") {
+          path_found = true;
+        }
+      }
+      if (y_loc < tileRowCount - 1) {
+        if (tiles[x_loc][y_loc + 1].state == "f") {
+          path_found = true;
+        }
+      }
+      if (path_found) {
+        break;
+      }
+      let adjacency_list = [];
+      if (x_loc > 0) {
+        if (tiles[x_loc - 1][y_loc].state == "e") {
+          adjacency_list.unshift([
+            x_loc - 1,
+            y_loc,
+            tiles[x_loc - 1][y_loc].state,
+          ]);
+          tiles[x_loc - 1][y_loc].state = tiles[x_loc][y_loc].state + "l";
+        }
+      }
+      if (x_loc < tileRowCount - 1) {
+        if (tiles[x_loc + 1][y_loc].state == "e") {
+          adjacency_list.unshift([
+            x_loc + 1,
+            y_loc,
+            tiles[x_loc + 1][y_loc].state,
+          ]);
+          tiles[x_loc + 1][y_loc].state = tiles[x_loc][y_loc].state + "r";
+        }
+      }
+
+      if (y_loc > 0) {
+        if (tiles[x_loc][y_loc - 1].state == "e") {
+          adjacency_list.unshift([
+            x_loc,
+            y_loc - 1,
+            tiles[x_loc][y_loc - 1].state,
+          ]);
+          tiles[x_loc][y_loc - 1].state = tiles[x_loc][y_loc].state + "u";
+        }
+      }
+
+      if (y_loc < tileColumnCount - 1) {
+        if (tiles[x_loc][y_loc + 1].state == "e") {
+          adjacency_list.unshift([
+            x_loc,
+            y_loc + 1,
+            tiles[x_loc][y_loc + 1].state,
+          ]);
+          tiles[x_loc][y_loc + 1].state = tiles[x_loc][y_loc].state + "d";
+        }
+      }
+
+      if (visited[y_loc * tileRowCount + x_loc] == false) {
+        visited[y_loc * tileRowCount + x_loc] = true;
+        while (adjacency_list.length > 0) {
+          let adj = adjacency_list.shift();
+          if (visited[adj[1] * tileRowCount + adj[0]] == false) {
+            stack.push(adj);
+            tiles[adj[0]][adj[1]].on_stack = true;
+          }
+        }
+      }
+      if (abort) {
+        solving = false;
+        finished = true;
+        abort = false;
+        return;
+      }
+      await timer(0.02);
+      draw();
+    }
+    if (!path_found) {
+      output.innerText = "No solution!";
+    } else {
+      output.innerText = "Solved!";
+
+      var path = tiles[x_loc][y_loc].state;
+      var pathLength = path.length;
+      var currX = startX;
+      var currY = startY;
+      for (var i = 0; i < pathLength - 1; i++) {
+        if (path.charAt(i + 1) == "u") {
+          currY -= 1;
+        }
+        if (path.charAt(i + 1) == "d") {
+          currY += 1;
+        }
+        if (path.charAt(i + 1) == "r") {
+          currX += 1;
+        }
+        if (path.charAt(i + 1) == "l") {
+          currX -= 1;
+        }
+        tiles[currX][currY].state = "x";
+        await timer(0.02);
+        draw();
+      }
+    }
+  }
+  solving = false;
+}

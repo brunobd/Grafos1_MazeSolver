@@ -24,8 +24,7 @@ O projeto consiste em um resolvedor de labirinto, o qual é desenhado na tela pe
 ## Uso 
 Basta desenhar o labirinto com o mouse e clicar no botão "Solve!"
 ## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
-
+![](./.github/04.mp4)
 
 
 

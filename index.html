@@ -12,10 +12,14 @@
       <canvas id="canvas" width="700" height="700"></canvas>
       <br />
       <div id="menu">
-        <button class="btn btn-solve" onclick="depth_first_search()">Solve</button>
+        <button class="btn btn-solve" onclick="solve()">Solve</button>
         <button class="btn btn-reset" onclick="reset()">Reset</button>
         <button class="btn btn-abort" onclick="abortSolving()">Abort</button>
       </div>
+      <select id="select">
+        <option value="bfs">Breadth First Search</option>
+        <option value="dfs">Depth First Search</option>
+      </select>
       <p id="output"></p>
     </div>
   </body>

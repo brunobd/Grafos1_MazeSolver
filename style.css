@@ -62,3 +62,11 @@ p {
   font-size: 30pt;
   color: rgb(0, 0, 0);
 }
+#select{
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 15pt;
+  outline: none;
+  width: 350px;
+  padding: 5px;
+}

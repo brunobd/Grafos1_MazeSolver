@@ -24,7 +24,8 @@ O projeto consiste em um resolvedor de labirinto, o qual é desenhado na tela pe
 ## Uso 
 Basta desenhar o labirinto com o mouse e clicar no botão "Solve!"
 ## Outros 
-![](./.github/04.mp4)
+
+https://github.com/brunobd/Grafos1_MazeSolver/assets/72686972/10965950-ed6b-43bc-9961-20638673cf9b
 
 
 

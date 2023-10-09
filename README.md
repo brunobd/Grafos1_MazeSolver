@@ -9,7 +9,7 @@
 | 18/0062760  |  Bruno Bernardes Duarte |
 
 ## Sobre 
-O projeto consiste em um resolvedor de labirinto, o qual é desenhado na tela pelo usuário.
+O projeto consiste em um resolvedor de labirinto, o qual é desenhado na tela pelo usuário. Nele é possível escolher entre o algoritmo de Busca por Profundidade ou Busca por Largura.
 
 ## Screenshots
 <div>
